@@ -539,6 +539,12 @@
             apiHeader.addEventListener('click', () => {
                 apiSection.classList.toggle('collapsed');
             });
+
+            // 动态替换 API 地址
+            const apiHost = window.location.origin;
+            document.querySelectorAll('.api-host').forEach(el => {
+                el.textContent = apiHost;
+            });
         }
 
         // 复制按钮

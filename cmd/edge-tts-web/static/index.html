@@ -119,7 +119,7 @@
                     </div>
                     <div class="code-block">
                         <button class="copy-btn" data-target="code-voices">复制</button>
-                        <pre id="code-voices">curl -X GET http://localhost:8080/api/voices</pre>
+                        <pre id="code-voices">curl -X GET <span class="api-host"></span>/api/voices</pre>
                     </div>
                     <p class="api-desc">返回所有可用语音列表，按语言分组。</p>
                 </div>
@@ -133,7 +133,7 @@
                     </div>
                     <div class="code-block">
                         <button class="copy-btn" data-target="code-tts">复制</button>
-                        <pre id="code-tts">curl -X POST http://localhost:8080/api/tts \
+                        <pre id="code-tts">curl -X POST <span class="api-host"></span>/api/tts \
   -H "Content-Type: application/json" \
   -d '{
     "text": "你好，这是一段测试文本",
@@ -170,7 +170,7 @@
                     </div>
                     <div class="code-block">
                         <button class="copy-btn" data-target="code-tts-srt">复制</button>
-                        <pre id="code-tts-srt">curl -X POST http://localhost:8080/api/tts \
+                        <pre id="code-tts-srt">curl -X POST <span class="api-host"></span>/api/tts \
   -H "Content-Type: application/json" \
   -d '{
     "text": "你好，这是一段测试文本",
@@ -192,7 +192,7 @@
                     </div>
                     <div class="code-block">
                         <button class="copy-btn" data-target="code-sample">复制</button>
-                        <pre id="code-sample">curl -X GET http://localhost:8080/api/voices/zh-CN-XiaoxiaoNeural/sample \
+                        <pre id="code-sample">curl -X GET <span class="api-host"></span>/api/voices/zh-CN-XiaoxiaoNeural/sample \
   --output sample.mp3</pre>
                     </div>
                     <p class="api-desc">获取指定语音的示例音频。</p>
@@ -204,19 +204,19 @@
                     <div class="code-block">
                         <button class="copy-btn" data-target="code-more">复制</button>
                         <pre id="code-more"># 英语语音
-curl -X POST http://localhost:8080/api/tts \
+curl -X POST <span class="api-host"></span>/api/tts \
   -H "Content-Type: application/json" \
   -d '{"text": "Hello World", "voice": "en-US-AriaNeural"}' \
   --output hello.mp3
 
 # 日语语音，加快语速
-curl -X POST http://localhost:8080/api/tts \
+curl -X POST <span class="api-host"></span>/api/tts \
   -H "Content-Type: application/json" \
   -d '{"text": "こんにちは", "voice": "ja-JP-NanamiNeural", "rate": "+30%"}' \
   --output japanese.mp3
 
 # 粤语语音
-curl -X POST http://localhost:8080/api/tts \
+curl -X POST <span class="api-host"></span>/api/tts \
   -H "Content-Type: application/json" \
   -d '{"text": "你好", "voice": "zh-HK-HiuGaaiNeural"}' \
   --output cantonese.mp3</pre>
