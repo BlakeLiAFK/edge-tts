@@ -596,3 +596,230 @@ body {
         transform: translateY(0);
     }
 }
+
+/* API 文档区域 */
+.api-section {
+    margin-top: 24px;
+    background: var(--card-color);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.api-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+}
+
+.api-header:hover {
+    background: var(--bg-color);
+}
+
+.api-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.toggle-icon {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.api-section.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.api-content {
+    padding: 0 20px 20px;
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.api-section.collapsed .api-content {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.api-item {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.api-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.api-item h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.api-endpoint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.api-endpoint .method {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.method.get {
+    background: #DBEAFE;
+    color: #1D4ED8;
+}
+
+.method.post {
+    background: #D1FAE5;
+    color: #047857;
+}
+
+.api-endpoint code {
+    font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.code-block {
+    position: relative;
+    background: #1E293B;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.code-block pre {
+    padding: 16px;
+    padding-right: 70px;
+    margin: 0;
+    overflow-x: auto;
+    font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #E2E8F0;
+    white-space: pre;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 6px;
+    color: #94A3B8;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #E2E8F0;
+}
+
+.copy-btn.copied {
+    background: var(--success);
+    color: white;
+}
+
+.api-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.api-params {
+    margin-top: 12px;
+    overflow-x: auto;
+}
+
+.api-params table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.api-params th,
+.api-params td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.api-params th {
+    background: var(--bg-color);
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.api-params td {
+    color: var(--text-primary);
+}
+
+.api-params td:first-child {
+    font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+    color: var(--accent);
+}
+
+.api-params td:nth-child(2) {
+    color: var(--text-secondary);
+}
+
+/* 响应式 - API 文档 */
+@media (max-width: 768px) {
+    .api-section {
+        border-radius: 12px;
+    }
+
+    .api-header {
+        padding: 16px;
+    }
+
+    .api-content {
+        padding: 0 16px 16px;
+    }
+
+    .code-block pre {
+        font-size: 0.75rem;
+        padding: 12px;
+        padding-right: 60px;
+    }
+
+    .api-params th,
+    .api-params td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .api-endpoint {
+        flex-wrap: wrap;
+    }
+
+    .code-block pre {
+        font-size: 0.7rem;
+    }
+}

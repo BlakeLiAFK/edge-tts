@@ -103,6 +103,128 @@
             </div>
         </aside>
 
+        <!-- API 文档 -->
+        <section class="api-section">
+            <div class="api-header" id="api-header">
+                <h3>API 接口文档</h3>
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="api-content" id="api-content">
+                <!-- 获取语音列表 -->
+                <div class="api-item">
+                    <h4>获取语音列表</h4>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/voices</code>
+                    </div>
+                    <div class="code-block">
+                        <button class="copy-btn" data-target="code-voices">复制</button>
+                        <pre id="code-voices">curl -X GET http://localhost:8080/api/voices</pre>
+                    </div>
+                    <p class="api-desc">返回所有可用语音列表，按语言分组。</p>
+                </div>
+
+                <!-- 文本转语音 -->
+                <div class="api-item">
+                    <h4>文本转语音</h4>
+                    <div class="api-endpoint">
+                        <span class="method post">POST</span>
+                        <code>/api/tts</code>
+                    </div>
+                    <div class="code-block">
+                        <button class="copy-btn" data-target="code-tts">复制</button>
+                        <pre id="code-tts">curl -X POST http://localhost:8080/api/tts \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "你好，这是一段测试文本",
+    "voice": "zh-CN-XiaoxiaoNeural",
+    "rate": "+0%",
+    "volume": "+0%",
+    "pitch": "+0Hz"
+  }' \
+  --output output.mp3</pre>
+                    </div>
+                    <div class="api-params">
+                        <table>
+                            <thead>
+                                <tr><th>参数</th><th>类型</th><th>说明</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>text</td><td>string</td><td>要转换的文本（必填）</td></tr>
+                                <tr><td>voice</td><td>string</td><td>语音ID，如 zh-CN-XiaoxiaoNeural</td></tr>
+                                <tr><td>rate</td><td>string</td><td>语速，范围 -100% ~ +100%</td></tr>
+                                <tr><td>volume</td><td>string</td><td>音量，范围 -100% ~ +100%</td></tr>
+                                <tr><td>pitch</td><td>string</td><td>音调，范围 -50Hz ~ +50Hz</td></tr>
+                                <tr><td>subtitle</td><td>bool</td><td>是否返回 SRT 字幕</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 带字幕的转换 -->
+                <div class="api-item">
+                    <h4>带字幕的转换</h4>
+                    <div class="api-endpoint">
+                        <span class="method post">POST</span>
+                        <code>/api/tts</code>
+                    </div>
+                    <div class="code-block">
+                        <button class="copy-btn" data-target="code-tts-srt">复制</button>
+                        <pre id="code-tts-srt">curl -X POST http://localhost:8080/api/tts \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "你好，这是一段测试文本",
+    "voice": "zh-CN-YunxiNeural",
+    "rate": "+20%",
+    "subtitle": true
+  }' \
+  --output output.zip</pre>
+                    </div>
+                    <p class="api-desc">当 subtitle=true 时，返回 ZIP 文件，包含 audio.mp3 和 subtitle.srt。</p>
+                </div>
+
+                <!-- 语音预览 -->
+                <div class="api-item">
+                    <h4>语音预览</h4>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/voices/{voiceId}/sample</code>
+                    </div>
+                    <div class="code-block">
+                        <button class="copy-btn" data-target="code-sample">复制</button>
+                        <pre id="code-sample">curl -X GET http://localhost:8080/api/voices/zh-CN-XiaoxiaoNeural/sample \
+  --output sample.mp3</pre>
+                    </div>
+                    <p class="api-desc">获取指定语音的示例音频。</p>
+                </div>
+
+                <!-- 更多示例 -->
+                <div class="api-item">
+                    <h4>更多示例</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" data-target="code-more">复制</button>
+                        <pre id="code-more"># 英语语音
+curl -X POST http://localhost:8080/api/tts \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Hello World", "voice": "en-US-AriaNeural"}' \
+  --output hello.mp3
+
+# 日语语音，加快语速
+curl -X POST http://localhost:8080/api/tts \
+  -H "Content-Type: application/json" \
+  -d '{"text": "こんにちは", "voice": "ja-JP-NanamiNeural", "rate": "+30%"}' \
+  --output japanese.mp3
+
+# 粤语语音
+curl -X POST http://localhost:8080/api/tts \
+  -H "Content-Type: application/json" \
+  -d '{"text": "你好", "voice": "zh-HK-HiuGaaiNeural"}' \
+  --output cantonese.mp3</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer class="footer">
             <p>Powered by Microsoft Edge TTS</p>
         </footer>

@@ -529,6 +529,38 @@
                 }
             }
         });
+
+        // API 文档折叠/展开
+        const apiHeader = document.getElementById('api-header');
+        const apiSection = document.querySelector('.api-section');
+        if (apiHeader && apiSection) {
+            // 默认折叠
+            apiSection.classList.add('collapsed');
+            apiHeader.addEventListener('click', () => {
+                apiSection.classList.toggle('collapsed');
+            });
+        }
+
+        // 复制按钮
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const targetId = btn.dataset.target;
+                const target = document.getElementById(targetId);
+                if (!target) return;
+
+                try {
+                    await navigator.clipboard.writeText(target.textContent);
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = '复制';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                } catch (e) {
+                    console.error('复制失败:', e);
+                }
+            });
+        });
     }
 
     // 启动应用
