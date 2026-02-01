@@ -1,0 +1,36 @@
+# 编译产物（只匹配根目录）
+/edge-tts-web
+/edge-tts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# 测试输出
+*.mp3
+*.srt
+*.wav
+
+# 系统文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 调试
+*.log
+*.out
+
+# 临时文件
+tmp/
+temp/

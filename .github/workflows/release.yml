@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.21'
+
+    - name: Build all platforms
+      run: |
+        mkdir -p dist
+
+        # Linux amd64
+        GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o dist/edge-tts-linux-amd64 ./cmd/edge-tts
+        GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o dist/edge-tts-web-linux-amd64 ./cmd/edge-tts-web
+
+        # Linux arm64
+        GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o dist/edge-tts-linux-arm64 ./cmd/edge-tts
+        GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o dist/edge-tts-web-linux-arm64 ./cmd/edge-tts-web
+
+        # macOS amd64
+        GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o dist/edge-tts-darwin-amd64 ./cmd/edge-tts
+        GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o dist/edge-tts-web-darwin-amd64 ./cmd/edge-tts-web
+
+        # macOS arm64
+        GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o dist/edge-tts-darwin-arm64 ./cmd/edge-tts
+        GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o dist/edge-tts-web-darwin-arm64 ./cmd/edge-tts-web
+
+        # Windows amd64
+        GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o dist/edge-tts-windows-amd64.exe ./cmd/edge-tts
+        GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o dist/edge-tts-web-windows-amd64.exe ./cmd/edge-tts-web
+
+        # Windows arm64
+        GOOS=windows GOARCH=arm64 go build -ldflags="-s -w" -o dist/edge-tts-windows-arm64.exe ./cmd/edge-tts
+        GOOS=windows GOARCH=arm64 go build -ldflags="-s -w" -o dist/edge-tts-web-windows-arm64.exe ./cmd/edge-tts-web
+
+    - name: Create archives
+      run: |
+        cd dist
+
+        # Linux
+        tar -czf edge-tts-linux-amd64.tar.gz edge-tts-linux-amd64 edge-tts-web-linux-amd64
+        tar -czf edge-tts-linux-arm64.tar.gz edge-tts-linux-arm64 edge-tts-web-linux-arm64
+
+        # macOS
+        tar -czf edge-tts-darwin-amd64.tar.gz edge-tts-darwin-amd64 edge-tts-web-darwin-amd64
+        tar -czf edge-tts-darwin-arm64.tar.gz edge-tts-darwin-arm64 edge-tts-web-darwin-arm64
+
+        # Windows
+        zip edge-tts-windows-amd64.zip edge-tts-windows-amd64.exe edge-tts-web-windows-amd64.exe
+        zip edge-tts-windows-arm64.zip edge-tts-windows-arm64.exe edge-tts-web-windows-arm64.exe
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          dist/edge-tts-linux-amd64.tar.gz
+          dist/edge-tts-linux-arm64.tar.gz
+          dist/edge-tts-darwin-amd64.tar.gz
+          dist/edge-tts-darwin-arm64.tar.gz
+          dist/edge-tts-windows-amd64.zip
+          dist/edge-tts-windows-arm64.zip
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

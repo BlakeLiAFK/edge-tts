@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge TTS Studio</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Edge TTS Studio</h1>
+            <p class="subtitle">Microsoft Edge TTS</p>
+        </header>
+
+        <main class="main">
+            <!-- 语言和音色选择 -->
+            <div class="voice-section">
+                <div class="select-group">
+                    <label for="language-select">语言</label>
+                    <select id="language-select">
+                        <option value="">加载中...</option>
+                    </select>
+                </div>
+                <div class="select-group voice-select-group">
+                    <label for="voice-select">音色</label>
+                    <div class="voice-select-wrapper">
+                        <select id="voice-select">
+                            <option value="">请先选择语言</option>
+                        </select>
+                        <button id="sample-btn" class="icon-btn" title="试听音色">
+                            <span class="icon">&#9834;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文本输入 -->
+            <div class="text-section">
+                <label for="text-input">文本内容</label>
+                <textarea id="text-input" placeholder="请输入要转换的文本..." maxlength="5000"></textarea>
+                <div class="char-count"><span id="char-count">0</span> / 5000</div>
+            </div>
+
+            <!-- 参数调整 -->
+            <div class="params-section">
+                <div class="param-group">
+                    <label>语速</label>
+                    <div class="slider-wrapper">
+                        <input type="range" id="rate-slider" min="-50" max="100" value="0">
+                        <span id="rate-value" class="param-value">正常</span>
+                    </div>
+                </div>
+                <div class="param-group">
+                    <label>音调</label>
+                    <div class="slider-wrapper">
+                        <input type="range" id="pitch-slider" min="-50" max="50" value="0">
+                        <span id="pitch-value" class="param-value">正常</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 字幕选项 -->
+            <div class="srt-section">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="srt-checkbox">
+                    <span>同时生成 SRT 字幕文件</span>
+                </label>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="action-section">
+                <button id="preview-btn" class="btn btn-secondary">
+                    <span class="btn-icon">&#9654;</span>
+                    <span>预览</span>
+                </button>
+                <button id="download-btn" class="btn btn-primary">
+                    <span class="btn-icon">&#8595;</span>
+                    <span>下载 MP3</span>
+                </button>
+            </div>
+
+            <!-- 音频播放器 -->
+            <div class="player-section" id="player-section" style="display: none;">
+                <audio id="audio-player" controls></audio>
+            </div>
+
+            <!-- 加载状态 -->
+            <div class="loading-overlay" id="loading-overlay" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p id="loading-text">正在合成...</p>
+            </div>
+        </main>
+
+        <!-- 历史记录 -->
+        <aside class="history-section">
+            <div class="history-header">
+                <h3>历史记录</h3>
+                <button id="clear-history-btn" class="text-btn">清空</button>
+            </div>
+            <div class="history-list" id="history-list">
+                <p class="history-empty">暂无历史记录</p>
+            </div>
+        </aside>
+
+        <footer class="footer">
+            <p>Powered by Microsoft Edge TTS</p>
+        </footer>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
