@@ -129,11 +129,11 @@
                     <h4>文本转语音</h4>
                     <div class="api-endpoint">
                         <span class="method post">POST</span>
-                        <code>/api/tts</code>
+                        <code>/api/synthesize</code>
                     </div>
                     <div class="code-block">
                         <button class="copy-btn" data-target="code-tts">复制</button>
-                        <pre id="code-tts">curl -X POST <span class="api-host"></span>/api/tts \
+                        <pre id="code-tts">curl -X POST <span class="api-host"></span>/api/synthesize \
   -H "Content-Type: application/json" \
   -d '{
     "text": "你好，这是一段测试文本",
@@ -166,11 +166,11 @@
                     <h4>带字幕的转换</h4>
                     <div class="api-endpoint">
                         <span class="method post">POST</span>
-                        <code>/api/tts</code>
+                        <code>/api/synthesize</code>
                     </div>
                     <div class="code-block">
                         <button class="copy-btn" data-target="code-tts-srt">复制</button>
-                        <pre id="code-tts-srt">curl -X POST <span class="api-host"></span>/api/tts \
+                        <pre id="code-tts-srt">curl -X POST <span class="api-host"></span>/api/synthesize \
   -H "Content-Type: application/json" \
   -d '{
     "text": "你好，这是一段测试文本",
@@ -204,19 +204,19 @@
                     <div class="code-block">
                         <button class="copy-btn" data-target="code-more">复制</button>
                         <pre id="code-more"># 英语语音
-curl -X POST <span class="api-host"></span>/api/tts \
+curl -X POST <span class="api-host"></span>/api/synthesize \
   -H "Content-Type: application/json" \
   -d '{"text": "Hello World", "voice": "en-US-AriaNeural"}' \
   --output hello.mp3
 
 # 日语语音，加快语速
-curl -X POST <span class="api-host"></span>/api/tts \
+curl -X POST <span class="api-host"></span>/api/synthesize \
   -H "Content-Type: application/json" \
   -d '{"text": "こんにちは", "voice": "ja-JP-NanamiNeural", "rate": "+30%"}' \
   --output japanese.mp3
 
 # 粤语语音
-curl -X POST <span class="api-host"></span>/api/tts \
+curl -X POST <span class="api-host"></span>/api/synthesize \
   -H "Content-Type: application/json" \
   -d '{"text": "你好", "voice": "zh-HK-HiuGaaiNeural"}' \
   --output cantonese.mp3</pre>

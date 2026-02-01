@@ -217,7 +217,7 @@ GET /api/voices
 ### 合成语音
 
 ```
-POST /api/tts
+POST /api/synthesize
 Content-Type: application/json
 
 {
